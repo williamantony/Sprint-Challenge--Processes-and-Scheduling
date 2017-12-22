@@ -2,6 +2,8 @@
 
 ## Multiple Choice and Short Answer Questions
 
+Add your answers to the Answers.md doc.
+
 1. Assume we have two processes, P1 and P2, that have both been initialized, and let's assume that each process on this machine is initially allocated 32 KB of memory as its address space. What are the possible address space ranges each process could have? Write a short paragraph explaining your answer.
 
 	a. P1: 0 - 32,000
@@ -20,6 +22,8 @@
 4. `printf` is a C library function that calls the `write` system call under the hood. What are some possible reasons as to why `printf` runs faster than `write`?
 
 ## Programming Exercise 1
+
+Add your code in the ex1/ex1.c file.
 
 Write a function that allocates an array of `int`s of a specified size.
 (The `cols` parameter holds the size.)
@@ -45,10 +49,11 @@ void alloc_1d_example(void)
 
 	printf("my_array[8] = %d\n", my_array[8]);
 }
-
 ```
 
 ## Programming Exercise 2
+
+Add your code in the ex2/ex2.c file.
 
 Write a function that allocates a two-dimensional array of `int`s of a
 specified size. (The `rows` parameter is how many rows in the array, and
