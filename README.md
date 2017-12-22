@@ -6,13 +6,13 @@ Add your answers to the Answers.md doc.
 
 1. Assume we have two processes, P1 and P2, that have both been initialized, and let's assume that each process on this machine is initially allocated 32 KB of memory as its address space. What are the possible address space ranges each process could have? Write a short paragraph explaining your answer.
 
-	a. P1: 0 - 32,000
+	a. P1: 0 - 32,000;
 	   P2: 32,001 - 64,000
 	
-	b. P1: 0 - 64,000
+	b. P1: 0 - 64,000;
 	   P2: 0 - 64,000
 	
-	c. P1: 32,001 - 64,000
+	c. P1: 32,001 - 64,000;
 	   P2: 0 - 32,000
 
 2. List all of the possible states a process may be in at any point in time. Briefly explain what each of these states mean.
