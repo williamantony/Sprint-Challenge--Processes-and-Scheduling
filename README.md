@@ -23,7 +23,7 @@ Add your answers to the Answers.md doc.
 
 ## Programming Exercise 1
 
-Add your code in the ex1/ex1.c file.
+Add your code in the `ex1/ex1.c` file.
 
 Write a function that allocates an array of `int`s of a specified size.
 (The `cols` parameter holds the size.)
@@ -53,7 +53,7 @@ void alloc_1d_example(void)
 
 ## Programming Exercise 2
 
-Add your code in the ex2/ex2.c file.
+Add your code in the `ex2/ex2.c` file.
 
 Write a function that allocates a two-dimensional array of `int`s of a
 specified size. (The `rows` parameter is how many rows in the array, and
