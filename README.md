@@ -18,6 +18,29 @@ Add your answers inline, below, with your pull request.
 This program implements a new shell that you can use to run commands from in
 Unix, similar to bash!
 
+At the end of the day, you should be able to run your shell, the run commands within it like so:
+
+```
+[bash]$ ./lssh 
+lambda-shell$ ls -l
+total 32
+-rwxr-xr-x  1 beej  staff  9108 Mar 15 13:28 lssh
+-rw-r--r--  1 beej  staff  2772 Mar 15 13:27 lssh.c
+lambda-shell$ head lssh.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+#define PROMPT "lambda-shell$ "
+
+#define MAX_TOKENS 100
+#define COMMANDLINE_BUFSIZE 1024
+#define DEBUG 0  // Set to 1 to turn on some debugging output
+lambda-shell$ exit
+[bash]$ 
+```
+
 General attack is to:
 
 * Loop until the user exits.
