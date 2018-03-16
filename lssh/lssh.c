@@ -69,10 +69,6 @@ int main(void)
     // How many command line args the user typed
     int args_count;
 
-    // nohup = No Hang Up
-    // Tracks status for background tasks
-    int nohup = 0;
-
     // Shell loops forever (until we tell it to exit)
     while (1) {
         // Print a prompt
@@ -112,6 +108,9 @@ int main(void)
             continue;
         }
         // Handle Background Task
+        // nohup = No Hang Up
+        // Tracks status for background tasks
+        int nohup = 0;
         if (strcmp(args[args_count - 1], "&") == 0) {
             args[args_count - 1] = NULL;
             nohup = 1;
@@ -121,7 +120,7 @@ int main(void)
         int outputToFile = 0;
         // Output File pointer
         char *outputFile;
-        for (int i = 1; i < args_count; i++) {
+        for (int i = 1; args[i] != NULL; i++) {
             if (strcmp(args[i], ">") == 0) {
                 outputToFile = 1;
                 outputFile = args[i + 1];
@@ -143,21 +142,26 @@ int main(void)
         #endif
 
         // Implement Here
-        int fd;
         if (fork() == 0) {
             // Child Process
             if (outputToFile == 1){
-                fd = open(outputFile, O_WRONLY | O_CREAT, 0777);
+                int fd = open(outputFile, O_WRONLY | O_CREAT, 0777);
                 dup2(fd, 1);
+                close(fd);
             }
 
             // Execute Command
             execvp(args[0], args);
 
+            exit(0);
+
         } else {
             // Parent Process
-            if (nohup == 0)
+            if (nohup == 1) {
+                while (waitpid(-1, NULL, WNOHANG) > 0);
+            }else {
                 wait(NULL);
+            }
 
         }
 
