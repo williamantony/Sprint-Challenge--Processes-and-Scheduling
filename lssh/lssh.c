@@ -5,6 +5,8 @@
 
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <errno.h>
 #include <signal.h>
 
@@ -109,10 +111,24 @@ int main(void)
 
             continue;
         }
-
+        // Handle Background Task
         if (strcmp(args[args_count - 1], "&") == 0) {
             args[args_count - 1] = NULL;
             nohup = 1;
+        }
+        // Handle Output to File
+        // Output to file
+        int outputToFile = 0;
+        // Output File pointer
+        char *outputFile;
+        for (int i = 1; i < args_count; i++) {
+            if (strcmp(args[i], ">") == 0) {
+                outputToFile = 1;
+                outputFile = args[i + 1];
+            }
+            if (outputToFile == 1) {
+                args[i] = NULL;
+            }
         }
 
         #if DEBUG
@@ -127,9 +143,15 @@ int main(void)
         #endif
 
         // Implement Here
-        
+        int fd;
         if (fork() == 0) {
             // Child Process
+            if (outputToFile == 1){
+                fd = open(outputFile, O_WRONLY | O_CREAT, 0777);
+                dup2(fd, 1);
+            }
+
+            // Execute Command
             execvp(args[0], args);
 
         } else {
