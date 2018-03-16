@@ -67,6 +67,10 @@ int main(void)
     // How many command line args the user typed
     int args_count;
 
+    // nohup = No Hang Up
+    // Tracks status for background tasks
+    int nohup = 0;
+
     // Shell loops forever (until we tell it to exit)
     while (1) {
         // Print a prompt
@@ -102,8 +106,13 @@ int main(void)
             if (chdir(directory) == -1) {
                 perror("chdir");
             }
-            
+
             continue;
+        }
+
+        if (strcmp(args[args_count - 1], "&") == 0) {
+            args[args_count - 1] = NULL;
+            nohup = 1;
         }
 
         #if DEBUG
@@ -125,7 +134,8 @@ int main(void)
 
         } else {
             // Parent Process
-            wait(NULL);
+            if (nohup == 0)
+                wait(NULL);
 
         }
 
