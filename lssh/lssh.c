@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define PROMPT "lambda-shell$ "
 
@@ -99,6 +101,19 @@ int main(void)
         }
 
         #endif
+
+        // Implement Here
+
+        if (fork() == 0) {
+            // Child Process
+            execvp(args[0], args);
+
+        } else {
+            // Parent Process
+            wait(NULL);
+            
+        }
+
     }
 
     return 0;
