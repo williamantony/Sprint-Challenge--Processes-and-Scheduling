@@ -99,14 +99,9 @@ int main(void)
             char *homeDirectory = getenv("HOME");
             char *directory = (args_count > 1) ? args[1] : homeDirectory;
 
-            if (chdir(directory) == 0)
-            {
-                char *getcwd_buffer;
-                char *currentDirectory = getcwd(getcwd_buffer, 128);
-                printf("Changed current directory to '%s'\n", currentDirectory);
+            if (chdir(directory) == -1) {
+                perror("chdir");
             }
-            else
-                printf("Error: Failed to change directory\n");
             
             continue;
         }
@@ -131,7 +126,7 @@ int main(void)
         } else {
             // Parent Process
             wait(NULL);
-            
+
         }
 
     }
